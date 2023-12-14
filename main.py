@@ -6,8 +6,23 @@ import random
 class VirtualPet:  # Set up math behind happiness functions/task completion
     def __init__(self, name):
         self.name = name
-        self.happiness = 50  # Initial happiness level
+        self.happiness = 30  # Initial happiness level
         self.coins = 0  # Initial coins
+
+        # Load images based on happiness
+        self.happiness_images = {
+            "low": ImageTk.PhotoImage(Image.open("pet_image30.png")),
+            "normal": ImageTk.PhotoImage(Image.open("pet_image.png")),
+            "high": ImageTk.PhotoImage(Image.open("pet_image70.png"))
+        }
+
+    def get_happiness_image(self):
+        if self.happiness <= 30:
+            return self.happiness_images["low"]
+        elif self.happiness >= 70:
+            return self.happiness_images["high"]
+        else:
+            return self.happiness_images["normal"]
 
     def complete_task(self):
         self.coins += 1  # Increase coins by task completion
@@ -103,13 +118,8 @@ class TaskTrackerApp:  # Set up Tkinter GUI
 
         tk.Label(self.second_page_frame, text=self.virtual_pet.display_info()).pack(pady=10)
 
-        # Load and resize the pet image
-        image = Image.open("pet_image.png")
-        image = image.resize((150, 150), Image.BICUBIC)
-        self.pet_image = ImageTk.PhotoImage(image)
-
         # Display the pet image
-        self.image_label = tk.Label(self.second_page_frame, image=self.pet_image)
+        self.image_label = tk.Label(self.second_page_frame, image=self.virtual_pet.get_happiness_image())
         self.image_label.pack()
 
         self.task_checkboxes = []
@@ -123,6 +133,16 @@ class TaskTrackerApp:  # Set up Tkinter GUI
         tk.Button(self.second_page_frame, text="Give Treat", command=self.feed_pet).pack(side=tk.LEFT, padx=5)
         tk.Button(self.second_page_frame, text="Fresh Water", command=self.water_pet).pack(side=tk.LEFT, padx=5)
         tk.Button(self.second_page_frame, text="Play", command=self.play_with_pet).pack(side=tk.LEFT, padx=5)
+
+    def enter_new_tasks(self):  # Update Task List
+        # Destroy the current second page
+        self.second_page_frame.destroy()
+
+        # Create a new second page with updated task goals
+        self.create_second_page()
+
+        # Show a message indicating that new tasks can be entered
+        messagebox.showinfo("Enter New Tasks", "You can now enter a new set of tasks.")
 
     def gradual_decrease_over_time(self): # The pet's happiness with slowly decrease over time to emphasize that you need to complete tasks
         # Decrease happiness every minute
