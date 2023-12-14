@@ -15,7 +15,7 @@ You can spend these coins with the interactive buttons at the bottom of the page
 Happiness naturally decreases at a rate of -1 every minute.
 
 # Testing Procedures: 
-To test this application, you would just go through the sequence of inputting and completing tasks as assumed. You will notice there are error cases put in place. For example, if you try to play with the pet when you have 0 coins, you will get an error message. Happiness also has a cap and a lower bound, it cannot go above 100 or below 0.
+To test this application, you would just go through the sequence of inputting and completing tasks as assumed. You will notice there are error cases put in place. For example, if you try to play with the pet when you have 0 coins, you will get an error message. Happiness also has a cap and a lower bound, it cannot go above 100 or below 0. The pet images change to match happiness status below happiness 30 or above happiness 70. To test the images easily you can manually input the intial happiness level in the Virual Pet class. Naturally, this would occur from >20 minutes passing with no task completion as a result of the gradual decrease set in place or from completing enough tasks that would increase happiness enough. 
 
 # Contributions and Acknowledgments:
 I got inspiration from a few other projects I found while researching my topic: https://devpost.com/software/docktor-kitty, https://gamedevacademy.org/pygame-virtual-pet-tutorial/, https://thecleverprogrammer.com/2021/01/24/screen-pet-with-python/
