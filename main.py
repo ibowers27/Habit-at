@@ -6,7 +6,7 @@ import random
 class VirtualPet:  # Set up math behind happiness functions/task completion
     def __init__(self, name):
         self.name = name
-        self.happiness = 30  # Initial happiness level
+        self.happiness = 50  # Initial happiness level
         self.coins = 0  # Initial coins
 
         # Load images based on happiness
